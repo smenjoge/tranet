@@ -36,7 +36,7 @@
                     <ol class="text-left" id="scores-list">
                     </ol>
                     <a class="btn btn-primary btn-md mr-5" href="index.html" role="button">Go Back</a>
-                    <a class="btn btn-primary btn-md ml-5" href="#" id="clearButton" role="button">Clear HighScores</a>
+                    <a class="btn btn-primary btn-md ml-5" id="clearButton" role="button">Clear HighScores</a>
                 </div>
               </div>
 
@@ -57,7 +57,7 @@
             if (scoreArr !== null) {
                 scoreArr.sort(function(a, b){return b.score - a.score});
 
-                for (i=0; i < scoreArr.length || i < 5; i++ ) {
+                for (i=0; i < scoreArr.length && i < 5; i++ ) {
                     var liEL = document.createElement("li");
                     liEL.textContent = scoreArr[i].name + " - " + scoreArr[i].score;
                     scoreListEl.append(liEL);
