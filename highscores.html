@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>JavaScript Quiz</title>
+    
+    <!-- Bootstramp CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+<body>
+    <div class="container-fluid bg-light mx-0">
+        <div class="row">
+            <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2 text-center">
+                <a href="#">View HighScores</a>
+            </div>
+            <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8  text-center">
+                <h3>JavaScript IQ Test </h3>
+            </div>
+        </div>
+    </div>  
+    
+    <div class="container  mt-3">
+        <div class="row">
+            <!-- placeholder column for screen sizes medium and xl -->
+            <div class="col-md-3 col-lg-3 col-xl-3">               
+            </div>
+            
+            <!-- main div -->
+            <div class="card col-md-6 col-lg-6 col-xl-6 px-0 text-center">
+                <div class="card-header">
+                    <h3>JavaScript Hall Of Fame!!!</h3>
+                </div>
+                <div class="card-body">
+                    <ol class="text-left" id="scores-list">
+                    </ol>
+                    <a class="btn btn-primary btn-md mr-5" href="index.html" role="button">Go Back</a>
+                    <a class="btn btn-primary btn-md ml-5" href="#" id="clearButton" role="button">Clear HighScores</a>
+                </div>
+              </div>
+
+            <!-- placeholder column for screen sizes medium and xl -->
+            <div class="col-md-3 col-lg-3 col-xl-3">               
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var scoreListEl = document.querySelector("#scores-list");
+        var clearButtonEl = document.querySelector("#clearButton");
+
+        // Get all scores from local storage and display top 5 scores on the screen
+        function getScores () {
+            var scoreArr = JSON.parse(localStorage.getItem("scores"));
+
+            if (scoreArr !== null) {
+                scoreArr.sort(function(a, b){return b.score - a.score});
+
+                for (i=0; i < scoreArr.length || i < 5; i++ ) {
+                    var liEL = document.createElement("li");
+                    liEL.textContent = scoreArr[i].name + " - " + scoreArr[i].score;
+                    scoreListEl.append(liEL);
+                }
+            }
+        };
+
+        // Remove all entries from local Storage
+        function emptyStorage () {
+            localStorage.removeItem("scores");
+            scoreListEl.innerHTML = "";
+        };
+
+        getScores();
+        clearButtonEl.addEventListener("click", emptyStorage);
+    </script>
+</body>
+</html>
