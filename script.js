@@ -52,7 +52,7 @@ var nameSubmitBt = document.querySelector("#nameSubmit"); //Submit button in for
 
 var questionIndex = 0;
 var correctCount = 0;
-var timer = 10;
+var timer = 60;
 var intervalId;
 var listScores = [];
 
