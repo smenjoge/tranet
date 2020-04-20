@@ -96,7 +96,7 @@ function diableOptions () {
 
 //Check if the user selected the right answer or wrong and display in the div questionResDiv
 //Function to render Next question is also called after 2 seconds pause 
-function checkAnswer () { 
+function checkAnswer (event) { 
     diableOptions();
 
     if (event.target.matches("button")) {
@@ -110,12 +110,14 @@ function checkAnswer () {
         }
         questionResDiv.setAttribute("class", "card-footer text-muted visible");
         clearInterval(intervalId);
-        displayTimer();
+        timeLeftEl.textContent = timer + " secs";
         
         //If user's previous answer was wrong, the timer value might be zero or negative
         //In such cases, don't call nextQuestion function.
         if (timer > 0) {
             setTimeout(nextQuestion, 2000);
+        } else {
+            endQuiz();
         }
     }   
 };
@@ -138,6 +140,7 @@ function endQuiz () {
     questionDiv.innerHTML = "";
     optionsDiv.innerHTML = "";
     questionResDiv.setAttribute("class", "invisible");
+    document.querySelector("#timeDiv").setAttribute("class", "invisible");
     questionDiv.append(document.createElement("h2").textContent = "Quiz Over!!!");
     optionsDiv.append(document.createElement("p").textContent = "Your Final Score is: " + correctCount);
     nameFormEl.setAttribute("class", "visible mt-3");
