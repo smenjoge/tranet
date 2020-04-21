@@ -33,8 +33,19 @@
                     <h3>JavaScript Hall Of Fame!!!</h3>
                 </div>
                 <div class="card-body">
-                    <ol class="text-left" id="scores-list">
-                    </ol>
+                    <!-- <ol class="text-left" id="scores-list">
+                    </ol> -->
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Score</th>
+                          </tr>
+                        </thead>
+                        <tbody id="scores-list">                            
+                        </tbody>
+                      </table>
                     <a class="btn btn-primary btn-md mr-5" href="index.html" role="button">Go Back</a>
                     <a class="btn btn-primary btn-md ml-5" href="#" id="clearButton" role="button">Clear HighScores</a>
                 </div>
@@ -58,9 +69,25 @@
                 scoreArr.sort(function(a, b){return b.score - a.score});
 
                 for (i=0; i < scoreArr.length && i < 5; i++ ) {
-                    var liEL = document.createElement("li");
-                    liEL.textContent = scoreArr[i].name + " - " + scoreArr[i].score;
-                    scoreListEl.append(liEL);
+                    // var liEL = document.createElement("li");
+                    // liEL.textContent = scoreArr[i].name + " - " + scoreArr[i].score;
+                    // scoreListEl.append(liEL);
+
+                    var tableRow = document.createElement("tr");
+                    var th1 = document.createElement("th");
+                    th1.setAttribute("scope", "row");
+                    th1.textContent = i + 1;
+                    tableRow.append(th1);
+
+                    var td1 = document.createElement("td");
+                    td1.textContent = scoreArr[i].name;
+                    tableRow.append(td1);
+
+                    var td2 = document.createElement("td");
+                    td2.textContent = scoreArr[i].score;
+                    tableRow.append(td2);
+
+                    scoreListEl.append(tableRow);
                 }
             }
         };
